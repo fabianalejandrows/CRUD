@@ -1,0 +1,33 @@
+<?php
+$db = new mysqli('localhost', 'root', '', 'mysqli');
+
+if($db->connect_error > 0){
+    die('Unable to connect to database [' . $db->connect_error . ']');
+}
+?>
+
+**************** CONSULTA **************
+
+<?php
+$sql = "SELECT *FROM datos";
+
+if(!$result = $db->query($sql)){
+  die('Hay un error corriendo en la consulta!!! [' . $db->error . ']');
+}
+while($row = $result->fetch_assoc()){
+	
+	// aqui toca montar toda la tabla...
+	$nnombre= $row['nombre'] . '<br />';
+	echo "Este es el nombre: $nnombre";
+    //echo $row['nombre'] . '<br />';
+	
+}
+?>
+
+
+*****INSERT*************************
+mysqli_query($db,"INSERT INTO datos (id, nombre, documento)
+VALUES (NULL, '$nombre', '$documento')") 
+or die(mysqli_error($db));
+******************************
+
